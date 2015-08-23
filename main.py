@@ -8,6 +8,7 @@ from requests import Request, Session
 from queue import Queue
 import time
 import json
+from multipart import MultipartEncoder
 
 try:
     # Python 3
@@ -178,7 +179,7 @@ def main():
     response = y.request(httptype='GET', method='videos', id='e0oELHA6EvM',
                          part='snippet', safeSearch='none').execute()
 
-    print(response.text)
+#    print(response.text)
 
     batch = batchRequest()
     batch.add(
@@ -194,6 +195,12 @@ def main():
     )
 
     batch.execute()
+
+    m = MultipartEncoder(
+                         fields={'field0': 'value1', 'field1': 'value2'}
+    )
+
+    print(m.to_string().decode('utf-8'))
 
 if __name__ == '__main__':
     main()
